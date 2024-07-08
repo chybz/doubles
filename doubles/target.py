@@ -4,7 +4,7 @@ from inspect import classify_class_attrs, isclass, ismodule, getmembers
 from doubles.object_double import ObjectDouble
 from doubles.verification import is_callable
 
-Attribute = namedtuple('Attribute', ['object', 'kind', 'defining_class'])
+Attribute = namedtuple("Attribute", ["object", "kind", "defining_class"])
 
 
 def _proxy_class_method_to_instance(original, name):
@@ -86,7 +86,7 @@ class Target(object):
 
         if ismodule(self.doubled_obj):
             for name, func in getmembers(self.doubled_obj, is_callable):
-                attrs[name] = Attribute(func, 'toplevel', self.doubled_obj)
+                attrs[name] = Attribute(func, "toplevel", self.doubled_obj)
         else:
             for attr in classify_class_attrs(self.doubled_obj_type):
                 attrs[attr.name] = attr
@@ -129,7 +129,7 @@ class Target(object):
         """
         try:
             return getattr(
-                getattr(self.obj.__class__, attr_name), '_doubles_target_method', None
+                getattr(self.obj.__class__, attr_name), "_doubles_target_method", None
             )
         except AttributeError:
             return None
@@ -149,9 +149,11 @@ class Target(object):
         if not is_callable(func):
             return None
 
+        print(f"=== GCA {func=}")
+
         attr = Attribute(
             func,
-            'attribute',
+            "attribute",
             self.doubled_obj if self.is_class_or_module() else self.doubled_obj_type,
         )
         self.attrs[attr_name] = attr

@@ -6,7 +6,7 @@ flake8==2.1.0
 # Validate package
 pyroma==1.6
 # Test runner
-pytest==8.2.2
+pytest==9.0.3
 nose2==0.15.1
 # Documentation
 Sphinx==1.2.2
